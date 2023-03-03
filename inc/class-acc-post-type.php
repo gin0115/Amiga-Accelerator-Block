@@ -15,7 +15,7 @@ class Accelerator_Post_Type {
 	public const POST_TYPE = 'gin0115_amiga_acc';
 
 	/**
-	 * Static iniitaliser of the class.
+	 * Static initialiser of the class.
 	 *
 	 * @return Accelerator_Post_Type
 	 */
@@ -44,8 +44,9 @@ class Accelerator_Post_Type {
 			self::POST_TYPE,
 			array(
 				'labels'       => array(
-					'name'                     => __( 'Amiga Accelerators', 'amiga-acc-block' ),
+					'name'                     => __( 'Accelerator Cards', 'amiga-acc-block' ),
 					'singular_name'            => __( 'Amiga Accelerator', 'amiga-acc-block' ),
+                    'add_new'                  => _x( 'New Accelerator', 'amiga-acc-block', 'amiga-acc-block' ),
 					'add_new_item'             => __( 'Add New Accelerator', 'amiga-acc-block' ),
 					'edit_item'                => __( 'Edit Accelerator', 'amiga-acc-block' ),
 					'new_item'                 => __( 'New Accelerator', 'amiga-acc-block' ),
@@ -66,6 +67,10 @@ class Accelerator_Post_Type {
 					'item_published_privately' => __( 'Accelerator published privately', 'amiga-acc-block' ),
 					'item_reverted_to_draft'   => __( 'Accelerator reverted to draft', 'amiga-acc-block' ),
 					'item_scheduled'           => __( 'Accelerator scheduled', 'amiga-acc-block' ),
+					'item_updated'             => __( 'Accelerator updated', 'amiga-acc-block' ),
+					'item_link'                => __( 'Accelerator link', 'amiga-acc-block' ),
+					'item_link_description'    => __( 'Accelerator link description', 'amiga-acc-block' ),
+					'item_link_target'         => __( 'Accelerator link target', 'amiga-acc-block' ),
 				),
 				'description'  => __( 'A custom post type for listing Amiga Accelerators', 'amiga-acc-block' ),
 				'public'       => true,
