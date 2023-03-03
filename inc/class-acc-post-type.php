@@ -12,10 +12,19 @@ namespace Gin0115\Amiga_Accelerator_Block;
 
 class Accelerator_Post_Type {
 
-	public const POST_TYPE = 'gin0115_amiga_acc';
+	public const POST_TYPE            = 'gin0115_amiga_acc';
+	public const META_MEMORY          = 'gin0115_amiga_acc_memory';
+	public const META_CPU             = 'gin0115_amiga_acc_cpu';
+	public const META_MPU             = 'gin0115_amiga_acc_cpu';
+	public const META_CPU_CLOCK_SPEED = 'gin0115_amiga_acc_cpu_clock_speed';
+	public const META_MPU_CLOCK_SPEED = 'gin0115_amiga_acc_mpu_clock_speed';
+	public const META_DAUGHTER_BOARD  = 'gin0115_amiga_acc_daughter_board';
+	public const META_IDE             = 'gin0115_amiga_acc_ide';
+	public const META_FLOPPY          = 'gin0115_amiga_acc_floppy';
+	public const META_SCSI            = 'gin0115_amiga_acc_sound';
 
 	/**
-	 * Static iniitaliser of the class.
+	 * Static initialiser of the class.
 	 *
 	 * @return Accelerator_Post_Type
 	 */
@@ -31,7 +40,8 @@ class Accelerator_Post_Type {
 	 * @return void
 	 */
 	public function hooks() {
-		add_action( 'init', array( $this, 'register_post_type' ) );
+		add_action( 'init', array( $this, 'register_post_type' ), 10 );
+		add_action( 'init', array( $this, 'register_meta' ), 11 );
 	}
 
 	/**
@@ -44,8 +54,9 @@ class Accelerator_Post_Type {
 			self::POST_TYPE,
 			array(
 				'labels'       => array(
-					'name'                     => __( 'Amiga Accelerators', 'amiga-acc-block' ),
+					'name'                     => __( 'Accelerator Cards', 'amiga-acc-block' ),
 					'singular_name'            => __( 'Amiga Accelerator', 'amiga-acc-block' ),
+					'add_new'                  => _x( 'New Accelerator', 'amiga-acc-block', 'amiga-acc-block' ),
 					'add_new_item'             => __( 'Add New Accelerator', 'amiga-acc-block' ),
 					'edit_item'                => __( 'Edit Accelerator', 'amiga-acc-block' ),
 					'new_item'                 => __( 'New Accelerator', 'amiga-acc-block' ),
@@ -66,6 +77,10 @@ class Accelerator_Post_Type {
 					'item_published_privately' => __( 'Accelerator published privately', 'amiga-acc-block' ),
 					'item_reverted_to_draft'   => __( 'Accelerator reverted to draft', 'amiga-acc-block' ),
 					'item_scheduled'           => __( 'Accelerator scheduled', 'amiga-acc-block' ),
+					'item_updated'             => __( 'Accelerator updated', 'amiga-acc-block' ),
+					'item_link'                => __( 'Accelerator link', 'amiga-acc-block' ),
+					'item_link_description'    => __( 'Accelerator link description', 'amiga-acc-block' ),
+					'item_link_target'         => __( 'Accelerator link target', 'amiga-acc-block' ),
 				),
 				'description'  => __( 'A custom post type for listing Amiga Accelerators', 'amiga-acc-block' ),
 				'public'       => true,
@@ -84,6 +99,107 @@ class Accelerator_Post_Type {
 				'rewrite'      => array(
 					'slug' => 'amiga-accelerators',
 				),
+			)
+		);
+	}
+
+	/**
+	 * Registers the associated meta fields.
+	 *
+	 * @return void
+	 */
+	public function register_meta() {
+		$auth_callback = static function() {
+			return current_user_can( 'edit_posts' );
+		};
+		register_post_meta(
+			self::POST_TYPE,
+			self::META_CPU_CLOCK_SPEED,
+			array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => $auth_callback,
+			)
+		);
+		register_post_meta(
+			self::POST_TYPE,
+			self::META_CPU,
+			array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => $auth_callback,
+			)
+		);
+		register_post_meta(
+			self::POST_TYPE,
+			self::META_MPU,
+			array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => $auth_callback,
+			)
+		);
+		register_post_meta(
+			self::POST_TYPE,
+			self::META_MPU_CLOCK_SPEED,
+			array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => $auth_callback,
+			)
+		);
+		register_post_meta(
+			self::POST_TYPE,
+			self::META_MEMORY,
+			array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => $auth_callback,
+			)
+		);
+		register_post_meta(
+			self::POST_TYPE,
+			self::META_DAUGHTER_BOARD,
+			array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'boolean',
+				'auth_callback' => $auth_callback,
+			)
+		);
+		register_post_meta(
+			self::POST_TYPE,
+			self::META_IDE,
+			array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'boolean',
+				'auth_callback' => $auth_callback,
+			)
+		);
+		register_post_meta(
+			self::POST_TYPE,
+			self::META_SCSI,
+			array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'boolean',
+				'auth_callback' => $auth_callback,
+			)
+		);
+		register_post_meta(
+			self::POST_TYPE,
+			self::META_FLOPPY,
+			array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'boolean',
+				'auth_callback' => $auth_callback,
 			)
 		);
 	}
