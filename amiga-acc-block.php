@@ -16,5 +16,11 @@ foreach ( glob( plugin_dir_path( __FILE__ ) . 'inc/*.php' ) as $file ) {
 	require_once $file;
 }
 
+// Constants.
+define( 'ACCELERATOR_BLOCK_VERSION', '0.1.0' );
+define( 'ACCELERATOR_BLOCK_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'ACCELERATOR_BLOCK_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+
 // Initialise all the classes.
 Gin0115\Amiga_Accelerator_Block\Accelerator_Post_Type::init();
+Gin0115\Amiga_Accelerator_Block\Amiga_Model_Taxonomy::init();
