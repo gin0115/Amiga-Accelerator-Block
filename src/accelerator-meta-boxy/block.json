@@ -1,0 +1,19 @@
+{
+    "apiVersion": 2,
+    "name": "gin0115/accelerator-meta-boxy",
+    "title": "Accelerator Data",
+    "category": "widgets",
+    "attributes": {
+        "memory": {
+            "type": "string",
+            "default": "unknown"
+        }
+    },
+    "description": "Meta boxy kinda thingy for Accelerator Post Type.",
+    "textdomain": "amiga-acc-block",
+    "supports": {
+        "html": false
+    },
+    "editorScript": "file:../../build/blocks/accelerator-meta-boxy/index.js",
+    "editorStyle": "file:../../build/editor.css"
+}

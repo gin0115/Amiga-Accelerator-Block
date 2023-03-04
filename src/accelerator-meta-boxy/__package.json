@@ -1,0 +1,33 @@
+{
+    "name": "aptn-utilities",
+    "version": "0.1.0",
+    "description": "Example block written with ESNext standard and JSX support – build step required.",
+    "author": "The WordPress Contributors",
+    "license": "GPL-2.0-or-later",
+    "main": "build/index.js",
+    "scripts": {
+        "all": "npm run build && npm run editor-css",
+        "build": "wp-scripts build",
+        "editor-css": "node-sass --output-style compressed --include-path scss src/editor.scss build/editor.css",
+        "front-css": "node-sass --output-style compressed --include-path scss src/style.scss build/style.css",
+        "format:js": "wp-scripts format-js",
+        "lint:css": "wp-scripts lint-style",
+        "lint:js": "wp-scripts lint-js",
+        "start": "wp-scripts start",
+        "packages-update": "wp-scripts packages-update"
+    },
+    "dependencies": {
+        "@wordpress/block-editor": "^7.0.1",
+        "@wordpress/blocks": "^11.0.1",
+        "@wordpress/i18n": "^4.2.1",
+        "mini-css-extract-plugin": "^2.4.5",
+        "node-sass": "^7.0.0"
+    },
+    "devDependencies": {
+        "@wordpress/scripts": "^18.0.0",
+        "copy-webpack-plugin": "^6.4.1",
+        "css-minimizer-webpack-plugin": "^3.3.0",
+        "sass-loader": "^12.4.0",
+        "throttle-debounce": "^3.0.1"
+    }
+}
