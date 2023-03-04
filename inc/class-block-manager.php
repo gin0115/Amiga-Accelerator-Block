@@ -56,14 +56,21 @@ class Block_Manager {
 	public function parse_meta_keys_for_blocks() {
 
 		$data = array(
-			'post_meta' => array(
-				'ghjkl' => Accelerator_Post_Type::META_MEMORY,
+			'post_types' => array(
+				'accelerators' => Accelerator_Post_Type::POST_TYPE,
+			),
+			'post_meta'  => array(
+				'memory' => Accelerator_Post_Type::META_MEMORY,
 			),
 		);
 
 		wp_add_inline_script(
-			'gin0115-accelerator-meta-boxy',
-			sprintf( 'CONST AcceleratorPostMeta = %s;', wp_json_encode( $data['post_meta'] ) ),
+			'gin0115-accelerator-meta-boxy-editor-script',
+			sprintf(
+				'const AcceleratorPostTypes = %s; const AcceleratorPostMeta = %s;',
+				wp_json_encode( $data['post_types'] ),
+				wp_json_encode( $data['post_meta'] )
+			),
 			'before'
 		);
 

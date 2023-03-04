@@ -99,6 +99,9 @@ class Accelerator_Post_Type {
 				'rewrite'      => array(
 					'slug' => 'amiga-accelerators',
 				),
+				'template'     => array(
+					array( 'gin0115/accelerator-meta-boxy' ),
+				),
 			)
 		);
 	}

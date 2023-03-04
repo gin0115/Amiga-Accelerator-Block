@@ -31,6 +31,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Edit() {
+  // Grab the meta keys from the page.
+  const metaKeys = AcceleratorPostMeta;
+  const customCPTs = AcceleratorPostTypes;
+
   // const [memoryVal, setMemoryVal] = useState(memory);
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
 
@@ -38,7 +42,7 @@ function Edit() {
   const postType = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_4__.useSelect)(select => select('core/editor').getCurrentPostType(), []);
 
   // Only allow for accelerator post types.
-  if (postType !== 'gin0115_amiga_acc') {
+  if (postType !== AcceleratorPostTypes.accelerators) {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, "This block can only be used on accelerator posts.");
   }
   const [meta, setMeta] = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_3__.useEntityProp)('postType', postType, 'meta');
@@ -46,9 +50,11 @@ function Edit() {
   // Handle the change of Memory.
   const currentMemory = meta.gin0115_amiga_acc_memory;
   const handleMemoryChange = value => {
+    // Create the meta object, using the dynamic meta keys.
+    const newMeta = meta;
+    newMeta[metaKeys.memory] = value;
     setMeta({
-      ...meta,
-      gin0115_amiga_acc_memory: value
+      newMeta
     });
   };
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {

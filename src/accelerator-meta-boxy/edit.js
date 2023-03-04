@@ -8,6 +8,10 @@ import { useSelect } from '@wordpress/data';
 
 export default function Edit() {
 
+	// Grab the meta keys from the page.
+	const metaKeys = AcceleratorPostMeta;
+	const customCPTs = AcceleratorPostTypes
+
 	// const [memoryVal, setMemoryVal] = useState(memory);
 	const blockProps = useBlockProps();
 
@@ -18,9 +22,8 @@ export default function Edit() {
 	);
 
 
-
 	// Only allow for accelerator post types.
-	if (postType !== 'gin0115_amiga_acc') {
+	if (postType !== AcceleratorPostTypes.accelerators) {
 		return (
 			<div {...blockProps}>
 				This block can only be used on accelerator posts.
@@ -28,13 +31,16 @@ export default function Edit() {
 		)
 	}
 
-
 	const [meta, setMeta] = useEntityProp('postType', postType, 'meta');
 
 	// Handle the change of Memory.
 	const currentMemory = meta.gin0115_amiga_acc_memory;
 	const handleMemoryChange = (value) => {
-		setMeta({ ...meta, gin0115_amiga_acc_memory: value });
+		// Create the meta object, using the dynamic meta keys.
+		const newMeta = meta;
+
+		newMeta[metaKeys.memory] = value;
+		setMeta({ newMeta });
 	};
 
 
