@@ -21,7 +21,7 @@ class Accelerator_Post_Type {
 	public const META_DAUGHTER_BOARD  = 'gin0115_amiga_acc_daughter_board';
 	public const META_IDE             = 'gin0115_amiga_acc_ide';
 	public const META_FLOPPY          = 'gin0115_amiga_acc_floppy';
-	public const META_SCSI            = 'gin0115_amiga_acc_sound';
+	public const META_SCSI            = 'gin0115_amiga_acc_scsi';
 
 	/**
 	 * Static initialiser of the class.
