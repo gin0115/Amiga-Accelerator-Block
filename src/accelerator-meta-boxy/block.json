@@ -4,7 +4,7 @@
     "title": "Accelerator Data",
     "category": "widgets",
     "attributes": {
-        "memory": {
+        "_gin0115_amiga_acc_memory": {
             "type": "string",
             "default": "unknown"
         }

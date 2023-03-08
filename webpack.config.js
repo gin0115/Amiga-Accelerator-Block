@@ -4,7 +4,7 @@
  * @see https://wordpress.stackexchange.com/questions/390282
  */
 
-// Native Depedencies.
+// Native Dependencies.
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const path = require('path');

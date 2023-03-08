@@ -43,7 +43,8 @@ class Block_Manager {
 	 */
 	public function allowed_blocks( $allowed_block_types, \WP_Block_Editor_Context $block_editor_context ) {
 
-		// dd( $block_editor_context, $allowed_block_types );
+		// Dont think this is what i need, but would like to only allow
+		// the block to be used on the accelerator post type.
 
 		return $allowed_block_types;
 	}
@@ -60,7 +61,11 @@ class Block_Manager {
 				'accelerators' => Accelerator_Post_Type::POST_TYPE,
 			),
 			'post_meta'  => array(
-				'memory' => Accelerator_Post_Type::META_MEMORY,
+				'memory'   => Accelerator_Post_Type::META_MEMORY,
+				'cpu'      => Accelerator_Post_Type::META_CPU,
+				'cpuSpeed' => Accelerator_Post_Type::META_CPU_CLOCK_SPEED,
+				'mpu'      => Accelerator_Post_Type::META_MPU,
+				'mpuSpeed' => Accelerator_Post_Type::META_MPU_CLOCK_SPEED,
 			),
 		);
 

@@ -25,3 +25,4 @@ define( 'ACCELERATOR_BLOCK_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 Gin0115\Amiga_Accelerator_Block\Accelerator_Post_Type::init();
 Gin0115\Amiga_Accelerator_Block\Amiga_Model_Taxonomy::init();
 Gin0115\Amiga_Accelerator_Block\Block_Manager::init();
+
