@@ -42,7 +42,7 @@ class Accelerator_Post_Type {
 	public function hooks() {
 		add_action( 'init', array( $this, 'register_post_type' ), 9 );
 		add_action( 'init', array( $this, 'register_meta' ), 10 );
-		add_filter( 'is_protected_meta', array( $this, 'protected_meta_keys' ), 10, 2 );
+		// add_filter( 'is_protected_meta', array( $this, 'protected_meta_keys' ), 10, 2 );
 
 	}
 

@@ -2,7 +2,13 @@
  * WordPress dependencies
  */
 import { useBlockProps } from "@wordpress/block-editor";
-import { TextControl } from '@wordpress/components';
+import {
+	TextControl,
+	ToggleControl,
+	Flex, FlexBlock, FlexItem,
+	Card, CardHeader, CardBody
+
+} from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
 import { useSelect } from '@wordpress/data';
 import { __ } from "@wordpress/i18n";
@@ -42,31 +48,59 @@ export default function Edit() {
 
 	return (
 		<div {...blockProps}>
-			<TextControl
-				label={__("Accelerator Memory", "amiga-acc-block")}
-				value={meta[AcceleratorPostMeta.memory]}
-				onChange={metaUpdate(AcceleratorPostMeta.memory)}
-			/>
-			<TextControl
-				label={__("Accelerator CPU Model", "amiga-acc-block")}
-				value={meta[AcceleratorPostMeta.cpu]}
-				onChange={metaUpdate(AcceleratorPostMeta.cpu)}
-			/>
-			<TextControl
-				label={__("Accelerator CPU Speed", "amiga-acc-block")}
-				value={meta[AcceleratorPostMeta.cpuSpeed]}
-				onChange={metaUpdate(AcceleratorPostMeta.cpuSpeed)}
-			/>
-			<TextControl
-				label={__("Accelerator MPU Model", "amiga-acc-block")}
-				value={meta[AcceleratorPostMeta.mpu]}
-				onChange={metaUpdate(AcceleratorPostMeta.mpu)}
-			/>
-			<TextControl
-				label={__("Accelerator MPU Speed", "amiga-acc-block")}
-				value={meta[AcceleratorPostMeta.mpuSpeed]}
-				onChange={metaUpdate(AcceleratorPostMeta.mpuSpeed)}
-			/>
+			<Card>
+				<CardHeader>
+					Accelerator Details
+				</CardHeader>
+				<CardBody>
+					<TextControl
+						label={__("Accelerator Memory", "amiga-acc-block")}
+						value={meta[AcceleratorPostMeta.memory]}
+						onChange={metaUpdate(AcceleratorPostMeta.memory)}
+					/>
+					<TextControl
+						label={__("Accelerator CPU Model", "amiga-acc-block")}
+						value={meta[AcceleratorPostMeta.cpu]}
+						onChange={metaUpdate(AcceleratorPostMeta.cpu)}
+					/>
+					<TextControl
+						label={__("Accelerator CPU Speed", "amiga-acc-block")}
+						value={meta[AcceleratorPostMeta.cpuSpeed]}
+						onChange={metaUpdate(AcceleratorPostMeta.cpuSpeed)}
+					/>
+					<TextControl
+						label={__("Accelerator MPU Model", "amiga-acc-block")}
+						value={meta[AcceleratorPostMeta.mpu]}
+						onChange={metaUpdate(AcceleratorPostMeta.mpu)}
+					/>
+					<TextControl
+						label={__("Accelerator MPU Speed", "amiga-acc-block")}
+						value={meta[AcceleratorPostMeta.mpuSpeed]}
+						onChange={metaUpdate(AcceleratorPostMeta.mpuSpeed)}
+					/>
+					<ToggleControl
+						label={__("Has SCSI Controller", "amiga-acc-block")}
+						checked={meta[AcceleratorPostMeta.scsi]}
+						onChange={metaUpdate(AcceleratorPostMeta.scsi)}
+					/>
+					<ToggleControl
+						label={__("Has IDE Controller", "amiga-acc-block")}
+						checked={meta[AcceleratorPostMeta.ide]}
+						onChange={metaUpdate(AcceleratorPostMeta.ide)}
+					/>
+					<ToggleControl
+						label={__("Has Floppy Controller", "amiga-acc-block")}
+						checked={meta[AcceleratorPostMeta.floppy]}
+						onChange={metaUpdate(AcceleratorPostMeta.floppy)}
+					/>
+					<ToggleControl
+						label={__("Is Daughter Board", "amiga-acc-block")}
+						checked={meta[AcceleratorPostMeta.daughterBoard]}
+						onChange={metaUpdate(AcceleratorPostMeta.daughterBoard)}
+					/>
+				</CardBody>
+			</Card>
+
 		</div>
 	);
 }

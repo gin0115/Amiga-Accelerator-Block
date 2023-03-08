@@ -61,11 +61,15 @@ class Block_Manager {
 				'accelerators' => Accelerator_Post_Type::POST_TYPE,
 			),
 			'post_meta'  => array(
-				'memory'   => Accelerator_Post_Type::META_MEMORY,
-				'cpu'      => Accelerator_Post_Type::META_CPU,
-				'cpuSpeed' => Accelerator_Post_Type::META_CPU_CLOCK_SPEED,
-				'mpu'      => Accelerator_Post_Type::META_MPU,
-				'mpuSpeed' => Accelerator_Post_Type::META_MPU_CLOCK_SPEED,
+				'memory'        => Accelerator_Post_Type::META_MEMORY,
+				'cpu'           => Accelerator_Post_Type::META_CPU,
+				'cpuSpeed'      => Accelerator_Post_Type::META_CPU_CLOCK_SPEED,
+				'mpu'           => Accelerator_Post_Type::META_MPU,
+				'mpuSpeed'      => Accelerator_Post_Type::META_MPU_CLOCK_SPEED,
+				'scsi'          => Accelerator_Post_Type::META_SCSI,
+				'ide'           => Accelerator_Post_Type::META_IDE,
+				'floppy'        => Accelerator_Post_Type::META_FLOPPY,
+				'daughterBoard' => Accelerator_Post_Type::META_DAUGHTER_BOARD,
 			),
 		);
 

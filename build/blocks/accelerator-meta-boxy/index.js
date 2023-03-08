@@ -59,7 +59,7 @@ function Edit() {
       newMeta
     });
   };
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Card, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.CardHeader, null, "Accelerator Details"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.CardBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Accelerator Memory", "amiga-acc-block"),
     value: meta[AcceleratorPostMeta.memory],
     onChange: metaUpdate(AcceleratorPostMeta.memory)
@@ -79,7 +79,23 @@ function Edit() {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Accelerator MPU Speed", "amiga-acc-block"),
     value: meta[AcceleratorPostMeta.mpuSpeed],
     onChange: metaUpdate(AcceleratorPostMeta.mpuSpeed)
-  }));
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Has SCSI Controller", "amiga-acc-block"),
+    checked: meta[AcceleratorPostMeta.scsi],
+    onChange: metaUpdate(AcceleratorPostMeta.scsi)
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Has IDE Controller", "amiga-acc-block"),
+    checked: meta[AcceleratorPostMeta.ide],
+    onChange: metaUpdate(AcceleratorPostMeta.ide)
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Has Floppy Controller", "amiga-acc-block"),
+    checked: meta[AcceleratorPostMeta.floppy],
+    onChange: metaUpdate(AcceleratorPostMeta.floppy)
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Is Daughter Board", "amiga-acc-block"),
+    checked: meta[AcceleratorPostMeta.daughterBoard],
+    onChange: metaUpdate(AcceleratorPostMeta.daughterBoard)
+  }))));
 }
 
 /***/ }),
