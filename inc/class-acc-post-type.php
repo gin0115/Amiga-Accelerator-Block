@@ -40,8 +40,10 @@ class Accelerator_Post_Type {
 	 * @return void
 	 */
 	public function hooks() {
-		add_action( 'init', array( $this, 'register_post_type' ), 10 );
-		add_action( 'init', array( $this, 'register_meta' ), 11 );
+		add_action( 'init', array( $this, 'register_post_type' ), 9 );
+		add_action( 'init', array( $this, 'register_meta' ), 10 );
+		add_filter( 'is_protected_meta', array( $this, 'protected_meta_keys' ), 10, 2 );
+
 	}
 
 	/**
@@ -202,6 +204,27 @@ class Accelerator_Post_Type {
 				'auth_callback' => $auth_callback,
 			)
 		);
+	}
+
+	/**
+	 * Makes the meta keys private to avoid showing in editor panel.
+	 * This is a workaround for the fact that the meta keys are not
+	 * registered as private in the post type registration.
+	 */
+	public function protected_meta_keys( $protected, $meta_key ) {
+		$all_keys = array(
+			self::META_CPU_CLOCK_SPEED,
+			self::META_CPU,
+			self::META_MPU,
+			self::META_MPU_CLOCK_SPEED,
+			self::META_MEMORY,
+			self::META_DAUGHTER_BOARD,
+			self::META_IDE,
+			self::META_SCSI,
+			self::META_FLOPPY,
+		);
+
+		return in_array( $meta_key, $all_keys, true ) ? true : $protected;
 	}
 
 
