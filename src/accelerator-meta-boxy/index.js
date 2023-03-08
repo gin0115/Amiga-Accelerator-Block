@@ -14,7 +14,7 @@ import Save from "./save";
 
 export const settings = {
 	title: __("Accelerator Meta Boxy", "amiga-acc-block"),
-	keywords: [__("design")],
+	keywords: [__("design", "amiga-acc-block")],
 	edit: Edit,
 	save: Save,
 };

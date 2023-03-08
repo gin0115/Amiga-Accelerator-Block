@@ -269,7 +269,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const settings = {
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Accelerator Meta Boxy", "amiga-acc-block"),
-  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("design")],
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("design", "amiga-acc-block")],
   edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_3__["default"]
 };

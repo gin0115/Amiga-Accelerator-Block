@@ -13,15 +13,15 @@ namespace Gin0115\Amiga_Accelerator_Block;
 class Accelerator_Post_Type {
 
 	public const POST_TYPE            = 'gin0115_amiga_acc';
-	public const META_MEMORY          = '_gin0115_amiga_acc_memory';
-	public const META_CPU             = '_gin0115_amiga_acc_cpu';
-	public const META_MPU             = '_gin0115_amiga_acc_mpu';
-	public const META_CPU_CLOCK_SPEED = '_gin0115_amiga_acc_cpu_clock_speed';
-	public const META_MPU_CLOCK_SPEED = '_gin0115_amiga_acc_mpu_clock_speed';
-	public const META_DAUGHTER_BOARD  = '_gin0115_amiga_acc_daughter_board';
-	public const META_IDE             = '_gin0115_amiga_acc_ide';
-	public const META_FLOPPY          = '_gin0115_amiga_acc_floppy';
-	public const META_SCSI            = '_gin0115_amiga_acc_sound';
+	public const META_MEMORY          = 'gin0115_amiga_acc_memory';
+	public const META_CPU             = 'gin0115_amiga_acc_cpu';
+	public const META_MPU             = 'gin0115_amiga_acc_mpu';
+	public const META_CPU_CLOCK_SPEED = 'gin0115_amiga_acc_cpu_clock_speed';
+	public const META_MPU_CLOCK_SPEED = 'gin0115_amiga_acc_mpu_clock_speed';
+	public const META_DAUGHTER_BOARD  = 'gin0115_amiga_acc_daughter_board';
+	public const META_IDE             = 'gin0115_amiga_acc_ide';
+	public const META_FLOPPY          = 'gin0115_amiga_acc_floppy';
+	public const META_SCSI            = 'gin0115_amiga_acc_sound';
 
 	/**
 	 * Static initialiser of the class.
@@ -42,6 +42,8 @@ class Accelerator_Post_Type {
 	public function hooks() {
 		add_action( 'init', array( $this, 'register_post_type' ), 9 );
 		add_action( 'init', array( $this, 'register_meta' ), 10 );
+		add_filter( 'is_protected_meta', array( $this, 'protected_meta_keys' ), 10, 2 );
+
 	}
 
 	/**
@@ -210,6 +212,27 @@ class Accelerator_Post_Type {
 				'auth_callback' => $auth_callback,
 			)
 		);
+	}
+
+	/**
+	 * Makes the meta keys private to avoid showing in editor panel.
+	 * This is a workaround for the fact that the meta keys are not
+	 * registered as private in the post type registration.
+	 */
+	public function protected_meta_keys( $protected, $meta_key ) {
+		$all_keys = array(
+			self::META_CPU_CLOCK_SPEED,
+			self::META_CPU,
+			self::META_MPU,
+			self::META_MPU_CLOCK_SPEED,
+			self::META_MEMORY,
+			self::META_DAUGHTER_BOARD,
+			self::META_IDE,
+			self::META_SCSI,
+			self::META_FLOPPY,
+		);
+
+		return in_array( $meta_key, $all_keys, true ) ? true : $protected;
 	}
 
 
