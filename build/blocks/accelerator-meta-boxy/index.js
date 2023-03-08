@@ -94,9 +94,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ save)
 /* harmony export */ });
-/**
- * WordPress dependencies
- */
 function save() {
   return null;
 }
