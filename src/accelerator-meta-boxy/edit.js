@@ -5,7 +5,6 @@ import { useBlockProps } from "@wordpress/block-editor";
 import {
 	TextControl,
 	ToggleControl,
-	Flex, FlexBlock, FlexItem,
 	Card, CardHeader, CardBody
 
 } from '@wordpress/components';
