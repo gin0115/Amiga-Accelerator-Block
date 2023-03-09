@@ -5,7 +5,6 @@
  */
 import { registerBlockType } from "@wordpress/blocks";
 import { __ } from "@wordpress/i18n";
-
 /**
  * Internal dependencies
  */
@@ -15,6 +14,7 @@ import Save from "./save";
 export const settings = {
 	title: __("Accelerator Meta Boxy", "amiga-acc-block"),
 	keywords: [__("design", "amiga-acc-block")],
+	"multiple": false,
 	edit: Edit,
 	save: Save,
 };

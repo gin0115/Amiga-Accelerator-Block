@@ -12,7 +12,7 @@ import { useEntityProp } from '@wordpress/core-data';
 import { useSelect } from '@wordpress/data';
 import { __ } from "@wordpress/i18n";
 
-export default function Edit() {
+export default function Edit({ attributes, setAttributes }) {
 	const blockProps = useBlockProps();
 
 	// META STUFF = https://developer.wordpress.org/block-editor/how-to-guides/metabox/
@@ -21,6 +21,12 @@ export default function Edit() {
 		[]
 	);
 
+	// Get the current post ID and set it as an attribute.
+	const currentPostID = useSelect(
+		(select) => select('core/editor').getCurrentPostId(),
+		[]
+	);
+	setAttributes({ postID: currentPostID })
 
 	// Only allow for accelerator post types.
 	if (postType !== AcceleratorPostTypes.accelerators) {
@@ -49,7 +55,7 @@ export default function Edit() {
 		<div {...blockProps}>
 			<Card>
 				<CardHeader>
-					Accelerator Details
+					{__("Accelerator Details", "amiga-acc-block")}
 				</CardHeader>
 				<CardBody>
 					<TextControl
@@ -96,6 +102,11 @@ export default function Edit() {
 						label={__("Is Daughter Board", "amiga-acc-block")}
 						checked={meta[AcceleratorPostMeta.daughterBoard]}
 						onChange={metaUpdate(AcceleratorPostMeta.daughterBoard)}
+					/>
+					<ToggleControl
+						label={__("Has Zorro Expansion", "amiga-acc-block")}
+						checked={meta[AcceleratorPostMeta.zorro]}
+						onChange={metaUpdate(AcceleratorPostMeta.zorro)}
 					/>
 				</CardBody>
 			</Card>

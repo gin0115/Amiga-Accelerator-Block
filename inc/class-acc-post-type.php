@@ -22,6 +22,7 @@ class Accelerator_Post_Type {
 	public const META_IDE             = 'gin0115_amiga_acc_ide';
 	public const META_FLOPPY          = 'gin0115_amiga_acc_floppy';
 	public const META_SCSI            = 'gin0115_amiga_acc_scsi';
+	public const META_ZORRO           = 'gin0115_amiga_acc_zorro';
 
 	/**
 	 * Static initialiser of the class.
@@ -35,6 +36,76 @@ class Accelerator_Post_Type {
 	}
 
 	/**
+	 * Returns a map of all meta keys with shortcuts.
+	 *
+	 * @return array<string, string>
+	 */
+	public static function get_meta_keys() : array {
+		return array(
+			'memory'        => self::META_MEMORY,
+			'cpu'           => self::META_CPU,
+			'cpuSpeed'      => self::META_CPU_CLOCK_SPEED,
+			'mpu'           => self::META_MPU,
+			'mpuSpeed'      => self::META_MPU_CLOCK_SPEED,
+			'daughterBoard' => self::META_DAUGHTER_BOARD,
+			'ide'           => self::META_IDE,
+			'floppy'        => self::META_FLOPPY,
+			'scsi'          => self::META_SCSI,
+			'zorro'         => self::META_ZORRO,
+		);
+	}
+
+	/**
+	 * Returns the values used to render the Accelerator_Card_Item details.
+	 *
+	 * @return array<string, array{title: string, icon: string}>
+	 */
+	public static function get_meta_details() : array {
+		return array(
+			self::META_CPU             => array(
+				'title' => __( 'CPU', 'amiga-accelerator-block' ),
+				'icon'  => ACCELERATOR_BLOCK_PLUGIN_URL . 'assets/icons/cpu.svg',
+			),
+			self::META_MPU             => array(
+				'title' => __( 'MPU', 'amiga-accelerator-block' ),
+				'icon'  => ACCELERATOR_BLOCK_PLUGIN_URL . 'assets/icons/mpu.svg',
+			),
+			self::META_MEMORY          => array(
+				'title' => __( 'Memory', 'amiga-accelerator-block' ),
+				'icon'  => ACCELERATOR_BLOCK_PLUGIN_URL . 'assets/icons/ram.svg',
+			),
+			self::META_CPU_CLOCK_SPEED => array(
+				'title' => __( 'CPU Speed', 'amiga-accelerator-block' ),
+				'icon'  => ACCELERATOR_BLOCK_PLUGIN_URL . 'assets/icons/speed.svg',
+			),
+			self::META_MPU_CLOCK_SPEED => array(
+				'title' => __( 'MPU Speed', 'amiga-accelerator-block' ),
+				'icon'  => ACCELERATOR_BLOCK_PLUGIN_URL . 'assets/icons/speed.svg',
+			),
+			self::META_DAUGHTER_BOARD  => array(
+				'title' => __( 'Is Daughter Board', 'amiga-accelerator-block' ),
+				'icon'  => ACCELERATOR_BLOCK_PLUGIN_URL . 'assets/icons/board.svg',
+			),
+			self::META_IDE             => array(
+				'title' => __( 'IDE', 'amiga-accelerator-block' ),
+				'icon'  => ACCELERATOR_BLOCK_PLUGIN_URL . 'assets/icons/ide.svg',
+			),
+			self::META_FLOPPY          => array(
+				'title' => __( 'Floppy', 'amiga-accelerator-block' ),
+				'icon'  => ACCELERATOR_BLOCK_PLUGIN_URL . 'assets/icons/fdd.svg',
+			),
+			self::META_SCSI            => array(
+				'title' => __( 'SCSI', 'amiga-accelerator-block' ),
+				'icon'  => ACCELERATOR_BLOCK_PLUGIN_URL . 'assets/icons/scsi.svg',
+			),
+			self::META_ZORRO           => array(
+				'title' => __( 'Zorro', 'amiga-accelerator-block' ),
+				'icon'  => ACCELERATOR_BLOCK_PLUGIN_URL . 'assets/icons/expansion-card.svg',
+			),
+		);
+	}
+
+	/**
 	 * Registers all hooks.
 	 *
 	 * @return void
@@ -43,7 +114,7 @@ class Accelerator_Post_Type {
 		add_action( 'init', array( $this, 'register_post_type' ), 9 );
 		add_action( 'init', array( $this, 'register_meta' ), 10 );
 		add_filter( 'is_protected_meta', array( $this, 'protected_meta_keys' ), 10, 2 );
-
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 10 );
 	}
 
 	/**
@@ -102,7 +173,15 @@ class Accelerator_Post_Type {
 					'slug' => 'amiga-accelerators',
 				),
 				'template'     => array(
-					array( 'gin0115/accelerator-meta-boxy' ),
+					array(
+						'gin0115/accelerator-meta-boxy',
+						array(
+							'lock' => array(
+								'remove' => true,
+								'move'   => true,
+							),
+						),
+					),
 				),
 			)
 		);
@@ -212,6 +291,17 @@ class Accelerator_Post_Type {
 				'auth_callback' => $auth_callback,
 			)
 		);
+
+		register_post_meta(
+			self::POST_TYPE,
+			self::META_ZORRO,
+			array(
+				'show_in_rest'  => array( 'schema' => array( 'type' => 'boolean' ) ),
+				'single'        => true,
+				'type'          => 'boolean',
+				'auth_callback' => $auth_callback,
+			)
+		);
 	}
 
 	/**
@@ -220,20 +310,48 @@ class Accelerator_Post_Type {
 	 * registered as private in the post type registration.
 	 */
 	public function protected_meta_keys( $protected, $meta_key ) {
-		$all_keys = array(
-			self::META_CPU_CLOCK_SPEED,
-			self::META_CPU,
-			self::META_MPU,
-			self::META_MPU_CLOCK_SPEED,
-			self::META_MEMORY,
-			self::META_DAUGHTER_BOARD,
-			self::META_IDE,
-			self::META_SCSI,
-			self::META_FLOPPY,
-		);
-
-		return in_array( $meta_key, $all_keys, true ) ? true : $protected;
+		return in_array( $meta_key, $this->get_meta_keys(), true ) ? true : $protected;
 	}
 
+	/**
+	 * Registers the block editor assets.
+	 *
+	 * @return void
+	 */
+	public function enqueue_scripts() {
 
+		// If we are not viewing a single post of the accelerator post type, bail.
+		if ( ! is_singular( self::POST_TYPE ) ) {
+			return;
+		}
+
+		// Enqueue the styles.
+		wp_enqueue_style(
+			'accelerator-panel',
+			ACCELERATOR_BLOCK_PLUGIN_URL . 'build/blocks/accelerator-panel/index.css',
+			array(),
+			time()
+		);
+
+		wp_register_script(
+			'accelerator-panel',
+			ACCELERATOR_BLOCK_PLUGIN_URL . 'build/blocks/accelerator-panel/index.js',
+			array( 'wp-blocks', 'wp-element', 'wp-components', 'wp-editor' ),
+			time(),
+			true
+		);
+
+		wp_add_inline_script(
+			'accelerator-panel',
+			sprintf(
+				'const gin0115AcceleratorPanel = { postType: "%s", metaKeys: %s, rest: "%s", metaDetails: %s };',
+				self::POST_TYPE,
+				wp_json_encode( self::get_meta_keys() ),
+				get_rest_url( null, 'wp/v2/' . self::POST_TYPE . '/' ),
+				wp_json_encode( self::get_meta_details() )
+			),
+			'before'
+		);
+		wp_enqueue_script( 'accelerator-panel' );
+	}
 }

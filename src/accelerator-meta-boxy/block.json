@@ -4,9 +4,9 @@
     "title": "Accelerator Data",
     "category": "widgets",
     "attributes": {
-        "_gin0115_amiga_acc_memory": {
-            "type": "string",
-            "default": "unknown"
+        "postID": {
+            "type": "integer",
+            "default": 0
         }
     },
     "description": "Meta boxy kinda thingy for Accelerator Post Type.",

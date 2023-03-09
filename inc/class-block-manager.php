@@ -49,6 +49,8 @@ class Block_Manager {
 		return $allowed_block_types;
 	}
 
+
+
 	/**
 	 * Parse all accelerator post type meta keys to inline data for use in js
 	 *
@@ -60,17 +62,7 @@ class Block_Manager {
 			'post_types' => array(
 				'accelerators' => Accelerator_Post_Type::POST_TYPE,
 			),
-			'post_meta'  => array(
-				'memory'        => Accelerator_Post_Type::META_MEMORY,
-				'cpu'           => Accelerator_Post_Type::META_CPU,
-				'cpuSpeed'      => Accelerator_Post_Type::META_CPU_CLOCK_SPEED,
-				'mpu'           => Accelerator_Post_Type::META_MPU,
-				'mpuSpeed'      => Accelerator_Post_Type::META_MPU_CLOCK_SPEED,
-				'scsi'          => Accelerator_Post_Type::META_SCSI,
-				'ide'           => Accelerator_Post_Type::META_IDE,
-				'floppy'        => Accelerator_Post_Type::META_FLOPPY,
-				'daughterBoard' => Accelerator_Post_Type::META_DAUGHTER_BOARD,
-			),
+			'post_meta'  => Accelerator_Post_Type::get_meta_keys(),
 		);
 
 		wp_add_inline_script(
@@ -78,7 +70,7 @@ class Block_Manager {
 			sprintf(
 				'const AcceleratorPostTypes = %s; const AcceleratorPostMeta = %s;',
 				wp_json_encode( $data['post_types'] ),
-				wp_json_encode( $data['post_meta'] )
+				wp_json_encode( $data['post_meta'] ),
 			),
 			'before'
 		);
