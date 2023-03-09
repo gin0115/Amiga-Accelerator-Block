@@ -92,4 +92,5 @@ const buildJSDependencies = (file) =>
 
 module.exports = [
     buildBlockConfig('accelerator-meta-boxy'),
+	buildBlockConfig('accelerator-panel')
 ];
