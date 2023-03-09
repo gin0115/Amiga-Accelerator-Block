@@ -8,7 +8,6 @@ export default class AcceleratorCardComponent extends React.Component {
 
 		// Set the meta
 		this.meta = props.meta;
-		console.log(this.meta);
 	}
 	render() {
 		return (

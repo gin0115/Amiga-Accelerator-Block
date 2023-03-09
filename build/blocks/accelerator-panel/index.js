@@ -28,7 +28,6 @@ class AcceleratorCardComponent extends (react__WEBPACK_IMPORTED_MODULE_1___defau
 
     // Set the meta
     this.meta = props.meta;
-    console.log(this.meta);
   }
   render() {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
