@@ -42,10 +42,14 @@ class Block_Manager {
 	 * @return bool|string[]
 	 */
 	public function allowed_blocks( $allowed_block_types, \WP_Block_Editor_Context $block_editor_context ) {
+		// Get a list of all blocks.
+		$all_blocks = \WP_Block_Type_Registry::get_instance()->get_all_registered();
 
-		// Dont think this is what i need, but would like to only allow
-		// the block to be used on the accelerator post type.
-
+		// Remove the accelerator meta boxy block from the list of allowed blocks.
+		if ( \array_key_exists( 'gin0115/accelerator-meta-boxy', $all_blocks ) ) {
+			unset( $all_blocks['gin0115/accelerator-meta-boxy'] );
+			return array_keys( $all_blocks );
+		}
 		return $allowed_block_types;
 	}
 
